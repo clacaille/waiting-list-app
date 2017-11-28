@@ -9,9 +9,20 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     if @request.save
+      RequestMailer.confirm(@request).deliver_now
       redirect_to root_path
     else
       render :new
+    end
+  end
+
+  def confirm
+    @request = Request.find(params[:request])
+    if @request.email == params[:email]
+      @request.confirmed = true
+      @request.save
+    else
+      redirect_to root_path
     end
   end
 

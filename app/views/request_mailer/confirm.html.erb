@@ -1,0 +1,5 @@
+<h1>Hey <%= @request.name.capitalize %> !</h1>
+
+<p>
+  Please confirm your email address to join Workstation's waiting list by following <%= link_to "this link", confirm_url(request: @request, email: @request.email)  %> !
+</p>

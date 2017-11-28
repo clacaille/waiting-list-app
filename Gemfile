@@ -20,6 +20,10 @@ gem 'simple_form'
 gem 'uglifier'
 
 group :development, :test do
+  gem 'letter_opener'
+
+  gem 'binding_of_caller'
+  gem 'better_errors'
   gem 'rspec-rails', '~>3.6'
   gem 'pry-byebug'
   gem 'pry-rails'
