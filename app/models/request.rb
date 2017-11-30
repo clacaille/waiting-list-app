@@ -5,10 +5,15 @@ class Request < ApplicationRecord
 
   before_create :confirmation_token
 
+  def set_position
+    max_position = Request.maximum(:position)
+    self.position = max_position.nil? ? 1 : max_position + 1
+  end
+
   private
 
   def confirmation_token
-    if self.confirm_token.blank?
+    if confirm_token.blank?
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
   end
