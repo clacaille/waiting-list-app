@@ -16,16 +16,6 @@ class RequestsController < ApplicationController
     end
   end
 
-  def confirm
-    @request = Request.find(params[:request])
-    if @request.email == params[:email]
-      @request.confirmed = true
-      @request.save
-    else
-      redirect_to root_path
-    end
-  end
-
   private
 
   def request_params
