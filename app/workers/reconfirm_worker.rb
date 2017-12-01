@@ -3,8 +3,11 @@ class ReconfirmWorker
 
   def perform(request_id)
     request = Request.find(request_id)
-    request.confirmed = false
-    request.expired = true
-    RequestMailer.reconfirm(request).deliver_now
+    if request.accepted == false
+      request.confirmed = false
+      request.save
+      RequestMailer.reconfirm(request).deliver_now
+      ExpireWorker.perform_in(1.weeks, request_id)
+    end
   end
 end

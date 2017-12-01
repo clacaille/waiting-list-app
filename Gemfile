@@ -10,6 +10,7 @@ gem 'rails', '5.0.6'
 gem 'redis'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'acts_as_list'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'

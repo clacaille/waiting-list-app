@@ -1,5 +1,5 @@
 <h1>Hey <%= @request.name %> !</h1>
 
 <p>
-  Your request is currently positioned <%= @request.position %> in Workstation's waiting list. To keep your position, please reconfirm your email address by following <%= link_to "this link", confirm_url(token: @request.confirm_token)  %> !
+  Your request is currently positioned <%= @request.position %> in Workstation's waiting list. To keep your position, please reconfirm your email address by following <%= link_to "this link", confirm_url(token: @request.confirm_token) %> or your request will expired in 1 week !
 </p>

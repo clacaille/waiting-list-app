@@ -9,6 +9,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     if @request.save
+      @request.remove_from_list
       RequestMailer.confirm(@request).deliver_now
       redirect_to root_path
     else
@@ -20,8 +21,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by_confirm_token(params[:token])
     if @request
       @request.confirmed = true
-      @request.expired = false
-      @request.set_position if @request.position.nil?
+      @request.move_to_bottom
       @request.save
       ReconfirmWorker.perform_in(3.months, @request.id)
       # flash message to be added
