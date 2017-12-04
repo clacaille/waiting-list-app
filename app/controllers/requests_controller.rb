@@ -10,6 +10,7 @@ class RequestsController < ApplicationController
     if @request.save
       @request.remove_from_list
       RequestMailer.confirm(@request).deliver_now
+      flash[:notice] = "Congratulations, your request has been sent"
       redirect_to root_path
     else
       render :new
@@ -27,10 +28,10 @@ class RequestsController < ApplicationController
         @request.move_to_bottom
       end
       ReconfirmWorker.perform_in(3.months, @request.id)
-      # flash message to be added
+      flash[:notice] = "Congratulations, your request has been confirmed"
       redirect_to root_path
     else
-      # flash message to be added
+      flash[:alert] = "Sorry but this request is not found or expired"
       redirect_to root_path
     end
   end

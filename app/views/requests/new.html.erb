@@ -1,7 +1,15 @@
-<%= simple_form_for @request do |f| %>
-  <%= f.input :name %>
-  <%= f.input :email %>
-  <%= f.input :phone_number %>
-  <%= f.input :biography %>
-  <%= f.submit "Request my workstation", class: "btn btn-primary" %>
-<% end %>
+<div class="homepage" style="background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('<%= image_path 'wework.jpg' %>')">
+  <div class="header">
+    <h1>WORKSTATIONS</h1>
+    <p>Welcome to your new coworking space</p>
+  </div>
+  <div class="request-form">
+    <%= simple_form_for @request do |f| %>
+      <%= f.input :name, label: false, placeholder: "What's your name ?" %>
+      <%= f.input :email, label: false, placeholder: "Your email ?" %>
+      <%= f.input :phone_number, label: false, placeholder: "Your phone number ?" %>
+      <%= f.input :biography, as: :text, label: false, placeholder: "Tell us more about you" %>
+      <%= f.submit "Request my workstation", class: "btn request-btn" %>
+    <% end %>
+  </div>
+</div>

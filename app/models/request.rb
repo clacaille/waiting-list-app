@@ -1,9 +1,10 @@
 class Request < ApplicationRecord
   acts_as_list
 
-  validates :email, uniqueness: true, format: { with: /(\w+)\@(\w+)\.[a-zA-Z]/ }
-  validates :phone_number, uniqueness: true, format: { with: /((\+)33|0)[1-9](\d{2}){4}/ }
-  validates :biography, uniqueness: true, length: { minimum: 300 }
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true, format: { with: /(\w+)\@(\w+)\.[a-zA-Z]/ }
+  validates :phone_number, presence: true, uniqueness: true, format: { with: /((\+)33|0)[1-9](\d{2}){4}/ }
+  validates :biography, presence: true, uniqueness: true, length: { minimum: 300 }
 
   before_create :confirmation_token
 

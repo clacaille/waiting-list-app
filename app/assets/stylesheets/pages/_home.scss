@@ -1,1 +1,40 @@
 // Specific CSS for your home-page
+.homepage {
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  color: black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    font-size: 55px;
+  }
+  p {
+    font-size: 20px;
+  }
+}
+
+.request-form {
+  width: 40%;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+.request-btn {
+  width: 100%;
+  background-color: #31D365;
+  color: white;
+  &:hover {
+    background-color: #31EC63;
+    color: white;
+  }
+}
