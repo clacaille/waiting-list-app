@@ -10,10 +10,10 @@ class Request < ApplicationRecord
   def self.accept!
     request = Request.confirmed.first
     request.accepted = true
+    request.confirm_token = nil
     request.confirmed = false
     request.remove_from_list
     request.save
-    # Request.update_position!
     request
   end
 
@@ -35,18 +35,14 @@ class Request < ApplicationRecord
 
   def accept!
     self.accepted = true
+    self.confirm_token = nil
     self.confirmed = false
     self.remove_from_list
     save
-    # Request.update_position!
     self
   end
 
-  private
-
   def confirmation_token
-    if confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s
   end
 end

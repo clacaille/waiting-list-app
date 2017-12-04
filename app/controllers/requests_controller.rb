@@ -5,7 +5,6 @@ class RequestsController < ApplicationController
     @request = Request.new
   end
 
-
   def create
     @request = Request.new(request_params)
     if @request.save
@@ -21,9 +20,13 @@ class RequestsController < ApplicationController
     @request = Request.find_by_confirm_token(params[:token])
     if @request
       @request.confirmed = true
-      @request.move_to_bottom
+      @request.confirmation_token
       @request.save
-      ReconfirmWorker.perform_in(3.months, @request.id)
+      if @request.position.nil?
+        @request.insert_at
+        @request.move_to_bottom
+      end
+      ReconfirmWorker.perform_in(1.minutes, @request.id)
       # flash message to be added
       redirect_to root_path
     else
