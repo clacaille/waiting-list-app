@@ -26,7 +26,7 @@ class RequestsController < ApplicationController
         @request.insert_at
         @request.move_to_bottom
       end
-      ReconfirmWorker.perform_in(1.minutes, @request.id)
+      ReconfirmWorker.perform_in(3.months, @request.id)
       # flash message to be added
       redirect_to root_path
     else
