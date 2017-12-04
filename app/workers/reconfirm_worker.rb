@@ -7,7 +7,7 @@ class ReconfirmWorker
       request.confirmed = false
       request.save
       RequestMailer.reconfirm(request).deliver_now
-      ExpireWorker.perform_in(1.weeks, request_id)
+      ExpireWorker.perform_in(1.minutes, request_id)
     end
   end
 end
